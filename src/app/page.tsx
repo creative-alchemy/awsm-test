@@ -2,7 +2,7 @@ import Image from "next/image";
 import SearchForm from "./_components/SearchForm";
 import SearchResultCard from "./_components/SearchResultCard";
 
-async function getIpMetaData(ipAddress) {
+async function getIpMetaData(ipAddress: string | undefined) {
   if (!ipAddress) return {};
   const { signal } = new AbortController();
   const res = await fetch(
@@ -22,7 +22,7 @@ export default async function Home({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const ipMetaData = await getIpMetaData(searchParams?.ipAddress);
+  const ipMetaData = await getIpMetaData(searchParams?.ipAddress as string);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
